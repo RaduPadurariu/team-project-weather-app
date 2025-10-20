@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-// import "../styles/globals.css";
+import "../styles/globals.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import Header from "@/components/common/Header/Header";
+import Footer from "@/components/common/Footer/Footer";
 
 export const metadata: Metadata = {
   title: "Weather App - Team Project",
@@ -29,7 +32,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+        <Footer />
+      </body>
     </html>
   );
 }
