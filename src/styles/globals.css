@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
 @layer base {
   *,
@@ -9,63 +10,142 @@
   }
 
   :root {
-    --textPrimary: "";
-    --textSecondary: "";
-    --textHeading: "";
-    --backgroundPrimary: "";
-    --backgroundSecondary: "";
     --base-font-size: "16px";
-  }
 
-  html {
-    font-size: var(--base-font-size);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+    /* Colors */
+    /* 🔴 RED */
+    --red-50: #fffefe;
+    --red-100: #fffdfd;
+    --red-200: #fffdfc;
+    --red-300: #fefcfb;
+    --red-400: #fefbfa;
+    --red-500: #fefaf9;
+    --red-600: #e7e4e3;
+    --red-700: #b4b2b1;
+    --red-800: #8c8a89;
+    --red-900: #6b6969;
 
-  body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
-      sans-serif;
-    line-height: 1.5;
-    -webkit-text-size-adjust: 100%;
-  }
+    /* ⚫ BLACK */
+    --black-50: #e7e7e7;
+    --black-100: #b5b5b5;
+    --black-200: #919191;
+    --black-300: #5e5e5e;
+    --black-400: #3f3f3f;
+    --black-500: #0f0f0f;
+    --black-600: #0e0e0e;
+    --black-700: #0b0b0b;
+    --black-800: #080808;
+    --black-900: #060606;
 
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+    /* 🟣 PURPLE */
+    --purple-50: #f0ebfe;
+    --purple-100: #d1c1fc;
+    --purple-200: #baa3fa;
+    --purple-300: #9b79f8;
+    --purple-400: #875ff7;
+    --purple-500: #6937f5;
+    --purple-600: #6032df;
+    --purple-700: #4b27ae;
+    --purple-800: #3a1e87;
+    --purple-900: #2c1767;
 
-  ul,
-  ol {
-    list-style: none;
-  }
+    /* 🟡 YELLOW */
+    --yellow-50: #fefae8;
+    --yellow-100: #fcf0b6;
+    --yellow-200: #fae893;
+    --yellow-300: #f8de6a;
+    --yellow-400: #f6d843;
+    --yellow-500: #f4ce14;
+    --yellow-600: #debb12;
+    --yellow-700: #ad920e;
+    --yellow-800: #86710b;
+    --yellow-900: #665708;
 
-  img,
-  picture,
-  video,
-  canvas,
-  svg {
-    display: block;
-    max-width: 100%;
-  }
-
-  button,
-  input,
-  textarea,
-  select {
-    font: inherit;
-  }
-
-  button {
-    border: 0;
-    outline: 0;
-    background: none;
-    cursor: pointer;
+    /* ⚪ WHITE */
+    --white-50: #fdfdfd;
+    --white-100: #f7f7f7;
+    --white-200: #f4f4f4;
+    --white-300: #eeeeee;
+    --white-400: #ebebeb;
+    --white-500: #e6e6e6;
+    --white-600: #d1d1d1;
+    --white-700: #a3a3a3;
+    --white-800: #7f7f7f;
+    --white-900: #616161;
   }
 }
 
+html {
+  font-size: var(--base-font-size);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  outline: 0;
+  background: none;
+  cursor: pointer;
+}
+
 @layer components {
+  .weather-container {
+    padding-inline: 15px;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 540px;
+  }
+
+  /* Responsive */
+
+  @media screen and (min-width: 768px) {
+    .weather-container {
+      max-width: 720px;
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    .weather-container {
+      max-width: 960px;
+    }
+  }
+  @media screen and (min-width: 1280px) {
+    .weather-container {
+      max-width: 1140px;
+    }
+  }
 }
 
 @layer utilities {
