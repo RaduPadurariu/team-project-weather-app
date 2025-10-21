@@ -1,7 +1,87 @@
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
+import { FooterNavbar } from "./FooterNavbar";
+import { mariusSocialLinks, raduSocialLinks } from "@/data/data";
 
 const Footer = () => {
-  return <div>Footer</div>;
+  return (
+    <footer className="full bg-[var(--red-600)]">
+      <div className="w-full flex items-center justify-center pt-[42px] pb-8">
+        <Link href="/" className="">
+          <Image
+            src="/images/logo.png"
+            alt="Logo Image Footer"
+            width={564}
+            height={564}
+            className=" w-[104px] h-[104px] inline-block"
+          />
+        </Link>
+      </div>
+      <FooterNavbar />
+      <div className="w-full flex justify-center pb-8">
+        <div className="flex flex-col">
+          <div className="flex justify-between mb-2">
+            <span className="whitespace-nowrap">Radu Padurariu:</span>
+            <ul className="flex ml-5">
+              {raduSocialLinks.map((icon) => {
+                return (
+                  <li key={icon.id} className="mr-2">
+                    <a
+                      href={icon.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i
+                        className={`${icon.icon} text-2xl text-[var(--purple-400)]`}
+                      ></i>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+          <div className="flex justify-between">
+            <span className="whitespace-nowrap">Maftei Marius:</span>
+            <ul className="flex ml-5">
+              {mariusSocialLinks.map((icon) => {
+                return (
+                  <li key={icon.id} className="mr-2">
+                    <a
+                      href={icon.src}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i
+                        className={`${icon.icon} text-2xl text-[var(--purple-400)]`}
+                      ></i>
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className="w-full flex justify-center pb-3">
+        <div className="text-base text-[var(--black-300)] text-center px-[15px]">
+          <span>
+            Copyright &copy; All rights reserved | This template was inspired
+            by&nbsp;
+          </span>
+
+          <a
+            href="https://www.figma.com/design/gp8N9RpwlrAzruT6GLix1e/WeatherTrip-Weather-App--Community-?node-id=16-192&t=NanJkvLwqS8u5uJd-0"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-all duration-300 ease-in-out hover:text-[var(--purple-500)]"
+          >
+            Joao Marcos
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
 };
 
 export default Footer;
