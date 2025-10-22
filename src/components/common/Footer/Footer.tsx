@@ -64,14 +64,14 @@ const Footer = () => {
         </div>
       </div>
       <div className="w-full flex justify-center pb-5">
-        <div className="text-base text-[var(--black-300)] text-center px-[15px]">
+        <div className="text-sm text-[var(--black-300)] text-center px-[15px]">
           <span>
             Copyright &copy; All rights reserved | This template was inspired
             by&nbsp;
           </span>
 
           <a
-            href="https://www.figma.com/design/gp8N9RpwlrAzruT6GLix1e/WeatherTrip-Weather-App--Community-?node-id=16-192&t=NanJkvLwqS8u5uJd-0"
+            href="https://www.figma.com/files/team/1071487187872199805/resources/community/file/1388954110053705224?fuid=1071487182563597820"
             target="_blank"
             rel="noopener noreferrer"
             className="transition-all duration-300 ease-in-out hover:text-[var(--purple-500)]"

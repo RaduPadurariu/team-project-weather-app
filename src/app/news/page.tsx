@@ -1,7 +1,8 @@
+import News from "@/components/news/News";
 import React from "react";
 
-const News = () => {
-  return <div>News Page</div>;
+const NewsPage = () => {
+  return <News />;
 };
 
-export default News;
+export default NewsPage;

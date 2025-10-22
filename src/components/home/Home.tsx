@@ -2,7 +2,7 @@ import React from "react";
 import Hero from "./Hero/Hero";
 import HomeNews from "./HomeNews/HomeNews";
 
-const HomePage = () => {
+const Home = () => {
   return (
     <div>
       <Hero />
@@ -11,4 +11,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;

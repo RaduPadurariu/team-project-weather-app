@@ -2,23 +2,12 @@ import React from "react";
 import HomeNewsTitle from "./HomeNewsTitle";
 import Image from "next/image";
 import HomeNewsArticle from "./HomeNewsArticle";
+import HomeWeatherHeading from "./HomeWeatherHeading";
 
 const HomeNews = () => {
   return (
     <section>
-      <div className="relative bg-[url('/images/city.png')] w-full min-h-[450px] bg-cover bg-top bg-no-repeat flex justify-between items-center">
-        <div className="weather-container flex flex-col md:flex-row pr-10">
-          <div className="flex flex-col md:items-end w-full">
-            <h1 className="text-4xl lg:text-[68px]  font-semibold text-white py-10 md:text-right">
-              WeatherTrip.<span className="text-lg">news</span>
-            </h1>
-
-            <p className="text-lg md:text-xl text-white max-w-[400px] md:text-right">
-              Your Weather, Your Journey. Always a Step Ahead with Our
-            </p>
-          </div>
-        </div>
-      </div>
+      <HomeWeatherHeading />
       <div className="bg-[var(--red-500)] py-16">
         <div className="weather-container">
           <div className="max-w-[900px] mx-auto w-full">
