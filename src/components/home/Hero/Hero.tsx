@@ -92,14 +92,14 @@ const Hero = () => {
                     </div>
                     <div>
                       <ul className="flex w-full justify-between">
-                        <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-2 lg:px-3 flex flex-col items-center">
+                        <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-1.5 lg:px-3 flex flex-col items-center">
                           <div className="text-xs font-semibold mb-1">Now</div>
                           <i className="fa-regular fa-moon text-white text-2xl mb-1"></i>
                           <div className="text-xs font-semibold mb-1">
                             24&deg;
                           </div>
                         </li>
-                        <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-2 lg:px-3 flex flex-col items-center">
+                        <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-1.5 lg:px-3 flex flex-col items-center">
                           <div className="text-xs font-semibold mb-1">
                             00:00
                           </div>
@@ -108,7 +108,7 @@ const Hero = () => {
                             12&deg;
                           </div>
                         </li>
-                        <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-2 lg:px-3 flex flex-col items-center">
+                        <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-1.5 lg:px-3 flex flex-col items-center">
                           <div className="text-xs font-semibold mb-1">
                             05:00
                           </div>
@@ -117,7 +117,7 @@ const Hero = () => {
                             15&deg;
                           </div>
                         </li>
-                        <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-2 lg:px-3 flex flex-col items-center">
+                        <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-1.5 lg:px-3 flex flex-col items-center">
                           <div className="text-xs font-semibold mb-1">
                             10:00
                           </div>
@@ -126,7 +126,7 @@ const Hero = () => {
                             20&deg;
                           </div>
                         </li>
-                        <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-2 lg:px-3 flex flex-col items-center">
+                        <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-1.5 lg:px-3 flex flex-col items-center">
                           <div className="text-xs font-semibold mb-1">
                             15:00
                           </div>
