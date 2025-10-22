@@ -19,14 +19,14 @@ const Footer = () => {
         </Link>
       </div>
       <FooterNavbar />
-      <div className="w-full flex justify-center pb-8">
-        <div className="flex flex-col">
-          <div className="flex justify-between mb-2">
+      <div className="w-full flex justify-center pb-3">
+        <div className="flex flex-col md:flex-row justify-between">
+          <div className=" w-full flex justify-between mb-2 mr-0 md:mr-10">
             <span className="whitespace-nowrap">Radu Padurariu:</span>
-            <ul className="flex ml-5">
+            <ul className="flex ml-2">
               {raduSocialLinks.map((icon) => {
                 return (
-                  <li key={icon.id} className="mr-2">
+                  <li key={icon.id} className="">
                     <a
                       href={icon.src}
                       target="_blank"
@@ -43,10 +43,10 @@ const Footer = () => {
           </div>
           <div className="flex justify-between">
             <span className="whitespace-nowrap">Maftei Marius:</span>
-            <ul className="flex ml-5">
+            <ul className="flex ml-2">
               {mariusSocialLinks.map((icon) => {
                 return (
-                  <li key={icon.id} className="mr-2">
+                  <li key={icon.id} className="">
                     <a
                       href={icon.src}
                       target="_blank"
@@ -63,7 +63,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="w-full flex justify-center pb-3">
+      <div className="w-full flex justify-center pb-5">
         <div className="text-base text-[var(--black-300)] text-center px-[15px]">
           <span>
             Copyright &copy; All rights reserved | This template was inspired
