@@ -11,7 +11,11 @@ export const raduSocialLinks = [
     icon: "fa-brands fa-linkedin",
     src: "https://www.linkedin.com/in/radu-padurariu-13688991/",
   },
-  { id: 2, icon: "fab fa-github", src: "https://github.com/radupadurariu" },
+  {
+    id: 2,
+    icon: "fab fa-github",
+    src: "https://github.com/RaduPadurariu/team-project-weather-app",
+  },
   // { id: 3, icon: "fas fa-briefcase", src: "https://radupadurariu.netlify.app" },
 ];
 
@@ -24,7 +28,7 @@ export const mariusSocialLinks = [
   {
     id: 2,
     icon: "fab fa-github",
-    src: "https://github.com/MariusVasileMaftei",
+    src: "https://github.com/MariusVasileMaftei/python-weather-backend",
   },
   // { id: 3, icon: "fas fa-briefcase", src: "https://radupadurariu.netlify.app" },
 ];
@@ -101,5 +105,88 @@ export const breakingNewsArticles = [
     src: "/images/fallSeason.png",
     date: "12/06/2024",
     author: "Ana DeMarco",
+  },
+];
+
+export const todayForecast = [
+  {
+    id: 1,
+    date: "Saturday 27th 2024, 9:00:00",
+    wetherType: "Raining",
+    temp: "32",
+    hum: "67",
+    clouds: "/images/cloud-rain.png",
+  },
+  {
+    id: 2,
+    date: "Saturday 27th 2024, 9:00:00",
+    wetherType: "Raining",
+    temp: "32",
+    hum: "67",
+    clouds: "/images/cloud-drizzle.png",
+  },
+  {
+    id: 3,
+    date: "Saturday 27th 2024, 9:00:00",
+    wetherType: "Raining",
+    temp: "32",
+    hum: "67",
+    clouds: "/images/sun-weather.png",
+  },
+  {
+    id: 4,
+    date: "Saturday 27th 2024, 9:00:00",
+    wetherType: "Raining",
+    temp: "32",
+    hum: "67",
+    clouds: "/images/cloud-lightning.png",
+  },
+  {
+    id: 5,
+    date: "Saturday 27th 2024, 9:00:00",
+    wetherType: "Raining",
+    temp: "32",
+    hum: "67",
+    clouds: "/images/cloud-rain.png",
+  },
+  {
+    id: 6,
+    date: "Saturday 27th 2024, 9:00:00",
+    wetherType: "Raining",
+    temp: "32",
+    hum: "67",
+    clouds: "/images/cloud-rain.png",
+  },
+  {
+    id: 7,
+    date: "Saturday 27th 2024, 9:00:00",
+    wetherType: "Raining",
+    temp: "32",
+    hum: "67",
+    clouds: "/images/cloud-rain.png",
+  },
+  {
+    id: 8,
+    date: "Saturday 27th 2024, 9:00:00",
+    wetherType: "Raining",
+    temp: "32",
+    hum: "67",
+    clouds: "/images/cloud-rain.png",
+  },
+  {
+    id: 9,
+    date: "Saturday 27th 2024, 9:00:00",
+    wetherType: "Raining",
+    temp: "32",
+    hum: "67",
+    clouds: "/images/cloud-rain.png",
+  },
+  {
+    id: 10,
+    date: "Saturday 27th 2024, 9:00:00",
+    wetherType: "Raining",
+    temp: "32",
+    hum: "67",
+    clouds: "/images/cloud-rain.png",
   },
 ];
