@@ -3,7 +3,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <section className="w-full pt-[104px]">
+    <section className="w-full pt-[100px]">
       <div className="relative bg-[url('/images/banner.png')] w-full min-h-[450px] bg-cover bg-center bg-no-repeat flex justify-between items-center">
         <div className="absolute inset-0 bg-black/40 z-0"></div>
         <div className="weather-container flex flex-col md:flex-row">

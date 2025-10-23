@@ -6,7 +6,7 @@ import HomeWeatherHeading from "../home/HomeNews/HomeWeatherHeading";
 
 const News = () => {
   return (
-    <div className="pt-[104px]">
+    <div className="pt-[100px]">
       <HomeWeatherHeading />
       <MainNews />
       <BreakingNews />

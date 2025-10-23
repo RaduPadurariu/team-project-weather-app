@@ -4,7 +4,7 @@ import Forecast from "./Forecast/Forecast";
 
 const Weather = () => {
   return (
-    <div className="pt-[104px]">
+    <div className="pt-[100px]">
       <Forecast />
       <BreakingNews />
     </div>
