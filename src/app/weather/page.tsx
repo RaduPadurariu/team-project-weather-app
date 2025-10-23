@@ -1,7 +1,12 @@
+import Weather from "@/components/weather/Weather";
 import React from "react";
 
-const Weather = () => {
-  return <div>Weather Page</div>;
+const WeatherPage = () => {
+  return (
+    <>
+      <Weather />
+    </>
+  );
 };
 
-export default Weather;
+export default WeatherPage;
