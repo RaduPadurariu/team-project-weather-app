@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce"; // importă hookul tău
-import { LocationDataType } from "@/types/types";
+import { LocationDataType, OpenCageResult } from "@/types/types";
 
 const ForecastSearchForm = ({
   setSelectedLocation,
 }: {
   setSelectedLocation: (value: LocationDataType | null) => void;
 }) => {
-  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [suggestions, setSuggestions] = useState<OpenCageResult[]>([]);
   const [query, setQuery] = useState("");
   const [isSelecting, setIsSelecting] = useState(false);
 
@@ -34,16 +34,22 @@ const ForecastSearchForm = ({
         if (!res.ok) throw new Error("Request failed");
         const data = await res.json();
         setSuggestions(data.results || []);
-      } catch (err: any) {
-        if (err.name !== "AbortError") console.error("Error fetching:", err);
+      } catch (err: unknown) {
+        if (err instanceof DOMException && err.name === "AbortError") return;
+        if (err instanceof Error) {
+          console.error("Error fetching:", err.message);
+        } else {
+          console.error("Unknown error fetching:", err);
+        }
       }
     };
 
     fetchSuggestions();
+
     return () => controller.abort();
   }, [debouncedQuery, isSelecting]);
 
-  const handleClick = (item: any) => {
+  const handleClick = (item: OpenCageResult) => {
     setIsSelecting(true);
     const city =
       item.components.city ||

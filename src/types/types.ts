@@ -25,3 +25,15 @@ export interface WeatherContextType {
 export interface ContextProviderType {
   children: React.ReactNode;
 }
+
+export interface OpenCageResult {
+  formatted: string;
+  geometry: { lat: number; lng: number };
+  components: {
+    city?: string;
+    town?: string;
+    village?: string;
+    county?: string;
+    country: string;
+  };
+}

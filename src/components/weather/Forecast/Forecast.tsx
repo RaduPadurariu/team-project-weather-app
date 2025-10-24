@@ -1,7 +1,7 @@
 "use client";
 import { todayForecast } from "@/data/data";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ForecastDate from "./ForecastDate";
 import ForecastWidget from "./ForecastWidget";
 import ForecastSearchForm from "./ForecastSearchForm";
@@ -12,10 +12,6 @@ const Forecast = () => {
   const { currentLocation } = useWeatherContext();
   const [selectedLocation, setSelectedLocation] =
     useState<LocationDataType | null>(null);
-
-  useEffect(() => {
-    console.log(selectedLocation);
-  }, []);
 
   return (
     <section>

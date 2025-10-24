@@ -6,7 +6,7 @@ import { WeatherContext } from "./WeatherContext";
 
 export const ContextProvider = ({ children }: ContextProviderType) => {
   // const [data, setData] = useState<WeatherData[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // const [error, setError] = useState<string | null>(null);
   const [currentLocation, setCurrentLocation] =
     useState<LocationDataType | null>(null);
 
@@ -76,7 +76,7 @@ export const ContextProvider = ({ children }: ContextProviderType) => {
       },
       (err) => {
         console.error("Geolocation error:", err);
-        setError("Location access denied");
+        // setError("Location access denied");
       }
     );
   }, []);

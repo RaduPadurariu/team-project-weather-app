@@ -6,7 +6,7 @@ import Image from "next/image";
 import React from "react";
 
 const HeroApp = () => {
-  const { weekday, day, month, year, hour, minute } = useCurrentDate();
+  const { weekday, day, month, hour, minute } = useCurrentDate();
   const { currentLocation } = useWeatherContext();
   return (
     <div className="w-full md:w-1/2 h-auto md:absolute left-[50%] md:top-[-200%] lg:top-[-250%]">
