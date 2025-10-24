@@ -2,9 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar/Navbar";
+import { useCurrentDate } from "@/hooks/useCurrentDate";
+import { useWeatherContext } from "@/context/useContext";
 
 const Header = () => {
   const [isSticky, setIsSticky] = useState(false);
+  const { currentLocation } = useWeatherContext();
+
+  const { weekday, day, month, year, hour, minute } = useCurrentDate();
+  const formattedDate = `${weekday}, ${month} ${day} ${year}, ${hour}:${minute}`;
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -29,8 +35,7 @@ const Header = () => {
       >
         <div className="weather-container">
           <div className="text-[var(--black-600)] text-xs">
-            Monday, June 24, 2024, 13:57 Time zone in Brasilia - Federal
-            District (GMT-3)
+            {formattedDate} - {currentLocation?.city || "City"}
           </div>
         </div>
       </div>

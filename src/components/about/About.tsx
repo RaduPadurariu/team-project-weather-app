@@ -75,7 +75,7 @@ const About = () => {
             <div className="w-full md:w-1/2 flex flex-col justify-between py-10 order-1 md:order-2">
               <div></div>
               <h1 className="text-[var(--red-50)] text-5xl sm:text-7xl md:text-8xl text-center md:text-right pb-10 md:pb-0">
-                Maftei Marius
+                Marius Maftei
               </h1>
               <div className="flex flex-row gap-5 justify-center md:justify-end items-center">
                 <a

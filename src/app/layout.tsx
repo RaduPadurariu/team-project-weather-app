@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Header from "@/components/common/Header/Header";
 import Footer from "@/components/common/Footer/Footer";
+import { ContextProvider } from "@/context/ContextProvider";
 
 export const metadata: Metadata = {
   title: "Weather App - Team Project",
@@ -31,12 +32,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <Header />
-        {children}
-        <Footer />
-      </body>
-    </html>
+    <ContextProvider>
+      <html lang="en">
+        <body>
+          <Header />
+          {children}
+          <Footer />
+        </body>
+      </html>
+    </ContextProvider>
   );
 }
