@@ -1,88 +1,90 @@
 "use client";
 
-import { ContextProviderType, LocationDataType } from "@/types/types";
+import {
+  ContextProviderType,
+  WeatherApiType,
+  WeatherType,
+} from "@/types/types";
 import { useEffect, useState } from "react";
 import { WeatherContext } from "./WeatherContext";
 
 export const ContextProvider = ({ children }: ContextProviderType) => {
-  // const [data, setData] = useState<WeatherData[] | null>(null);
-  // const [error, setError] = useState<string | null>(null);
-  const [currentLocation, setCurrentLocation] =
-    useState<LocationDataType | null>(null);
+  const [currentWeather, setCurrentWeather] = useState<WeatherType | null>(
+    null
+  );
+  const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(
+    null
+  );
+  const [selectedWeather, setSelectedWeather] = useState<WeatherType | null>(
+    null
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // const locationApi = process.env.NEXT_PUBLIC_OPENCAGE_KEY;
+  // const locationLink = `https://api.opencagedata.com/geocode/v1/json?q=${currentLocation?.lat}+${currentLocation?.lng}&key=${locationApi}`;
 
   useEffect(() => {
-    // const fetchWeather = async () => {
-    //   try {
-    //     const res = await fetch(
-    //       "https://api.-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true"
-    //     );
-
-    //     if (!res.ok) {
-    //       throw new Error(`Weather fetch failed: status ${res.status}`);
-    //     }
-    //     const json = await res.json();
-
-    //     console.log("Vremea: ", json);
-    //   } catch (error) {
-    //     console.error("Failed to fetch weather", error);
-    //     setError((error as Error).message);
-    //   }
-    // };
-
-    // fetchWeather();
-
-    const fetchLocation = async (
-      lat: number,
-      lng: number
-    ): Promise<LocationDataType | undefined> => {
-      try {
-        const res = await fetch(
-          `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${process.env.NEXT_PUBLIC_OPENCAGE_KEY}`
-        );
-        const data = await res.json();
-
-        if (!data.results || data.results.length === 0) {
-          console.error("No results found");
-          return;
-        }
-
-        const result = data.results[0];
-        const city =
-          result.components.city ||
-          result.components.town ||
-          result.components.village ||
-          result.components.county;
-        const country = result.components.country;
-
-        const location: LocationDataType = {
-          city,
-          country,
-          lat,
-          lng,
-        };
-
-        console.log("Fetched location:", location);
-        setCurrentLocation(location);
-      } catch (err) {
-        console.error("Error fetching location:", err);
-      }
-    };
-
-    // Coordinates
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        const { latitude, longitude } = pos.coords;
-        fetchLocation(latitude, longitude);
+        setCoords({
+          lat: pos.coords.latitude,
+          lon: pos.coords.longitude,
+        });
       },
-      (err) => {
-        console.error("Geolocation error:", err);
-        // setError("Location access denied");
-      }
+      (err) => console.error("Geolocation error:", err)
     );
   }, []);
 
+  useEffect(() => {
+    if (!coords) return;
+
+    const fetchWeather = async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetch(
+          `https://python-weather-backend.onrender.com/weather?q=${coords.lat},${coords.lon}`
+        );
+        if (!res.ok) {
+          throw new Error(`Weather fetch failed: ${res.status}`);
+        }
+        const data: WeatherApiType = await res.json();
+        console.log(data);
+
+        const weather: WeatherType = {
+          city: data.city,
+          country: data.country,
+          lat: data.lat,
+          lon: data.lon,
+          temp: data.temperature_C,
+          humidity: data.humidity,
+          windSpeed: data.windspeed_kph,
+          condition: data.condition,
+        };
+
+        setCurrentWeather(weather);
+      } catch (err) {
+        setError("Error fetching weather data");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchWeather();
+  }, [coords]);
+
   return (
-    <WeatherContext.Provider value={{ currentLocation, setCurrentLocation }}>
+    <WeatherContext.Provider
+      value={{
+        currentWeather,
+        setCurrentWeather,
+        selectedWeather,
+        setSelectedWeather,
+        isLoading,
+        setIsLoading,
+        error,
+      }}
+    >
       {children}
     </WeatherContext.Provider>
   );

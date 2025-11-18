@@ -1,13 +1,13 @@
 "use client";
-import { LocationDataType } from "@/types/types";
+import { WeatherType } from "@/types/types";
 import React from "react";
 
 const ForecastWidget = ({
-  currentLocation,
+  currentWeather,
   selectedLocation,
 }: {
-  currentLocation: LocationDataType | null;
-  selectedLocation: LocationDataType | null;
+  currentWeather: WeatherType | null;
+  selectedLocation: WeatherType | null;
 }) => {
   return (
     <section className="relative bg-[url('/images/forecast.png')] w-full min-h-[335px] bg-cover bg-center bg-no-repeat rounded-lg">
@@ -18,10 +18,10 @@ const ForecastWidget = ({
             <div className="flex flex-col justify-between ">
               <div className="1">
                 <h1 className="text-2xl lg:text-[40px] font-semibold text-white pt-11 pb-3">
-                  {selectedLocation?.city || currentLocation?.city || "City"}
+                  {selectedLocation?.city || currentWeather?.city || "City"}
                 </h1>
                 <p className="text-base text-[var(--black-100)]">
-                  {selectedLocation?.country || currentLocation?.country}
+                  {selectedLocation?.country || currentWeather?.country}
                 </p>
               </div>
               <div className="2 font-semibold text-[68px] text-white pt-15">

@@ -1,5 +1,6 @@
 "use client";
 
+import LoadingSpinner from "@/components/common/LoadingSpinner/LoadingSpinner";
 import { useWeatherContext } from "@/context/useContext";
 import { useCurrentDate } from "@/hooks/useCurrentDate";
 import Image from "next/image";
@@ -7,7 +8,7 @@ import React from "react";
 
 const HeroApp = () => {
   const { weekday, day, month, hour, minute } = useCurrentDate();
-  const { currentLocation } = useWeatherContext();
+  const { currentWeather, isLoading } = useWeatherContext();
   return (
     <div className="w-full md:w-1/2 h-auto md:absolute left-[50%] md:top-[-200%] lg:top-[-250%]">
       <div className="w-full h-full relative">
@@ -21,7 +22,7 @@ const HeroApp = () => {
               </div>
             </div>
             <div className="text-xs font-semibold text-[var(--purple-500)]">
-              {currentLocation?.city || "City"}
+              {isLoading ? <LoadingSpinner /> : currentWeather?.city || "City"}
             </div>
             <div className="cursor-pointer">
               <i className="fa fa-plus-circle text-[var(--purple-500)] text-lg"></i>
@@ -46,24 +47,32 @@ const HeroApp = () => {
               </div>
               <div className="ml-[-1px] pb-2 flex items-center">
                 <i className="fa-regular mr-2 fa-moon text-xl"></i>
-                <span className="text-xs text-[var(--black-600)]">Clean</span>
+                <span className="text-xs text-[var(--black-600)]">
+                  {" "}
+                  {isLoading ? <LoadingSpinner /> : currentWeather?.condition}
+                </span>
               </div>
               <div className="ml-[-1px] pb-2 flex items-center">
                 <i className="fa-solid fa-wind mr-2 text-[var(--purple-500)] text-xl"></i>
-                <span className="text-xs text-[var(--black-600)] ">
-                  10.8 km/h
+                <span className="text-xs text-[var(--black-600)] flex ">
+                  {isLoading ? <LoadingSpinner /> : currentWeather?.windSpeed}{" "}
+                  km/h
                 </span>
               </div>
               <div className="ml-[-1px] pb-2 flex items-center">
                 <i className="fa-solid fa-cloud-rain mr-2 text-[var(--purple-500)] text-xl"></i>
-                <span className="text-xs text-[var(--black-600)] ">34%</span>
+                <span className="text-xs text-[var(--black-600)] flex">
+                  {isLoading ? <LoadingSpinner /> : currentWeather?.humidity}%
+                </span>
               </div>
             </div>
             <div className="flex flex-col justify-between text-right">
               <div className="text-[40px]">
                 {hour}:{minute}
               </div>
-              <div className="text-[32px]">24&deg;</div>
+              <div className="text-[32px] flex justify-end">
+                {isLoading ? <LoadingSpinner /> : currentWeather?.temp}&deg;
+              </div>
             </div>
           </div>
           <div>

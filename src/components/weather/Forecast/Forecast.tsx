@@ -6,12 +6,13 @@ import ForecastDate from "./ForecastDate";
 import ForecastWidget from "./ForecastWidget";
 import ForecastSearchForm from "./ForecastSearchForm";
 import { useWeatherContext } from "@/context/useContext";
-import { LocationDataType } from "@/types/types";
+import { WeatherType } from "@/types/types";
 
 const Forecast = () => {
-  const { currentLocation } = useWeatherContext();
-  const [selectedLocation, setSelectedLocation] =
-    useState<LocationDataType | null>(null);
+  const { currentWeather } = useWeatherContext();
+  const [selectedLocation, setSelectedLocation] = useState<WeatherType | null>(
+    null
+  );
 
   return (
     <section>
@@ -28,7 +29,7 @@ const Forecast = () => {
           <ForecastSearchForm setSelectedLocation={setSelectedLocation} />
         </div>
         <ForecastWidget
-          currentLocation={currentLocation}
+          currentWeather={currentWeather}
           selectedLocation={selectedLocation}
         />
         <div className="pt-10">
