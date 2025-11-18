@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     { name: "Radu Padurariu", url: "https://radupadurariu.netlify.app" },
   ],
   icons: {
-    icon: "/favicon.ico",
+    icon: "/images/favicon.png",
   },
 };
 

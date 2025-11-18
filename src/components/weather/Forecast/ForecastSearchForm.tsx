@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce"; // importă hookul tău
-import { LocationDataType, OpenCageResult } from "@/types/types";
+import { WeatherType, WeatherApiType } from "@/types/types";
 
 const ForecastSearchForm = ({
   setSelectedLocation,
 }: {
-  setSelectedLocation: (value: LocationDataType | null) => void;
+  setSelectedLocation: (value: WeatherType | null) => void;
 }) => {
-  const [suggestions, setSuggestions] = useState<OpenCageResult[]>([]);
+  const [suggestions, setSuggestions] = useState<WeatherApiType[]>([]);
   const [query, setQuery] = useState("");
   const [isSelecting, setIsSelecting] = useState(false);
 
@@ -44,34 +44,36 @@ const ForecastSearchForm = ({
       }
     };
 
-    fetchSuggestions();
+    // fetchSuggestions();
 
     return () => controller.abort();
   }, [debouncedQuery, isSelecting]);
 
-  const handleClick = (item: OpenCageResult) => {
-    setIsSelecting(true);
-    const city =
-      item.components.city ||
-      item.components.town ||
-      item.components.village ||
-      item.components.county;
-    const country = item.components.country;
-    const lat = item.geometry.lat;
-    const lng = item.geometry.lng;
+  // const handleClick = (item: WeatherApiType) => {
+  //   setIsSelecting(true);
+  //   const city = item.components.city || item.components.country;
+  //   const country = item.components.country;
+  //   const lat = item.components.lat;
+  //   const lng = item.components.lng;
+  //   const temp = item.components.temp;
+  //   const humidity = item.components.humidity;
+  //   const windSpeed = item.components.windSpeed;
 
-    const location: LocationDataType = {
-      city,
-      country,
-      lat,
-      lng,
-    };
+  //   const location: WeatherType = {
+  //     city,
+  //     country,
+  //     lat,
+  //     lon,
+  //     temp,
+  //     humidity,
+  //     windSpeed,
+  //   };
 
-    setSelectedLocation(location);
-    setQuery("");
-    setSuggestions([]);
-    setTimeout(() => setIsSelecting(false), 300);
-  };
+  //   setSelectedLocation(location);
+  //   setQuery("");
+  //   setSuggestions([]);
+  //   setTimeout(() => setIsSelecting(false), 300);
+  // };
 
   return (
     <div className="relative">
@@ -96,9 +98,9 @@ const ForecastSearchForm = ({
             <li
               key={i}
               className="p-2 text-sm border-b last:border-none"
-              onClick={() => handleClick(s)}
+              // onClick={() => handleClick(s)}
             >
-              {s.formatted}
+              {/* {s.components.city} */}
             </li>
           ))}
         </ul>

@@ -10,30 +10,45 @@ export interface WeatherData {
   temperature: number;
 }
 
-export interface LocationDataType {
+export interface WeatherType {
   city?: string;
   country?: string;
   lat: number;
-  lng: number;
+  lon: number;
+  temp?: number;
+  humidity?: number;
+  windSpeed?: number;
+  condition: string;
 }
 
 export interface WeatherContextType {
-  currentLocation: LocationDataType | null;
-  setCurrentLocation: (value: LocationDataType | null) => void;
+  currentWeather: WeatherType | null;
+  setCurrentWeather: (value: WeatherType | null) => void;
+  selectedWeather: WeatherType | null;
+  setSelectedWeather: (value: WeatherType | null) => void;
+  isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
+  error: string | null;
 }
 
 export interface ContextProviderType {
   children: React.ReactNode;
 }
 
-export interface OpenCageResult {
-  formatted: string;
-  geometry: { lat: number; lng: number };
-  components: {
-    city?: string;
-    town?: string;
-    village?: string;
-    county?: string;
-    country: string;
-  };
+export interface WeatherApiType {
+  country: string;
+  city: string;
+  lat: number;
+  lon: number;
+  temperature_C: number;
+  windspeed_kph: number;
+  humidity: number;
+  condition: string;
+}
+
+export interface WeatherDataType {
+  country: string;
+  name: string;
+  lat: number;
+  lon: number;
 }

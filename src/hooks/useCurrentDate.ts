@@ -20,40 +20,45 @@ export function useCurrentDate(): CurrentDateParts {
   });
 
   useEffect(() => {
-    const now = new Date();
-    const weekdayNames = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
+    const update = () => {
+      const now = new Date();
+      const weekdayNames = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ];
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      const year = now.getFullYear();
+      const month = monthNames[now.getMonth()];
+      const day = now.getDate();
+      const weekday = weekdayNames[now.getDay()];
+      const hour = now.getHours().toString().padStart(2, "0");
+      const minute = now.getMinutes().toString().padStart(2, "0");
+      setDateParts({ year, month, day, weekday, hour, minute });
+    };
 
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
+    update();
 
-    const year = now.getFullYear();
-    const month = monthNames[now.getMonth()];
-    const day = now.getDate();
-    const weekday = weekdayNames[now.getDay()];
-    const hour = now.getHours().toString().padStart(2, "0");
-    const minute = now.getMinutes().toString().padStart(2, "0");
+    const intervalId = setInterval(update, 60 * 1000);
 
-    setDateParts({ year, month, day, weekday, hour, minute });
+    return () => clearInterval(intervalId);
   }, []);
 
   return dateParts;
