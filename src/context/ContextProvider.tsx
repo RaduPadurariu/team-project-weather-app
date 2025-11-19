@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  ContextProviderType,
-  WeatherApiType,
-  WeatherType,
-} from "@/types/types";
+import { ContextProviderType, WeatherType } from "@/types/types";
 import { useEffect, useState } from "react";
 import { WeatherContext } from "./WeatherContext";
 
@@ -43,28 +39,42 @@ export const ContextProvider = ({ children }: ContextProviderType) => {
       setIsLoading(true);
       try {
         const res = await fetch(
-          `https://python-weather-backend.onrender.com/weather?q=${coords.lat},${coords.lon}`
+          `https://python-weather-backend.onrender.com/weather/forecast?q=${coords.lat},${coords.lon}&days=4`
         );
         if (!res.ok) {
           throw new Error(`Weather fetch failed: ${res.status}`);
         }
-        const data: WeatherApiType = await res.json();
+        const data: WeatherType = await res.json();
         console.log(data);
+
+        const formatIconUrl = (icon?: string | null): string | null => {
+          if (!icon) return null;
+          return icon.startsWith("//") ? "https:" + icon : icon;
+        };
 
         const weather: WeatherType = {
           city: data.city,
           country: data.country,
           lat: data.lat,
           lon: data.lon,
-          temp: data.temperature_C,
-          humidity: data.humidity,
-          windSpeed: data.windspeed_kph,
-          condition: data.condition,
+          forecast: data.forecast.map((f) => ({
+            date: f.date,
+            avg_humidity: f.avg_humidity,
+            avg_temp_C: f.avg_temp_C,
+            max_temp_C: f.max_temp_C,
+            min_temp_C: f.min_temp_C,
+            max_wind_kph: f.max_wind_kph,
+            condition: {
+              text: f.condition.text,
+              icon: formatIconUrl(f.condition.icon),
+            },
+          })),
         };
 
         setCurrentWeather(weather);
-      } catch (err) {
+      } catch {
         setError("Error fetching weather data");
+        setCurrentWeather(null);
       } finally {
         setIsLoading(false);
       }

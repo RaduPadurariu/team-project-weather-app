@@ -10,17 +10,6 @@ export interface WeatherData {
   temperature: number;
 }
 
-export interface WeatherType {
-  city?: string;
-  country?: string;
-  lat: number;
-  lon: number;
-  temp?: number;
-  humidity?: number;
-  windSpeed?: number;
-  condition: string;
-}
-
 export interface WeatherContextType {
   currentWeather: WeatherType | null;
   setCurrentWeather: (value: WeatherType | null) => void;
@@ -35,15 +24,25 @@ export interface ContextProviderType {
   children: React.ReactNode;
 }
 
-export interface WeatherApiType {
-  country: string;
-  city: string;
+export interface WeatherAppForecastType {
+  date: string;
+  avg_humidity: number;
+  avg_temp_C: number;
+  max_temp_C: number;
+  min_temp_C: number;
+  max_wind_kph: number;
+  condition: {
+    text: string;
+    icon: string | null;
+  };
+}
+
+export interface WeatherType {
+  city?: string;
+  country?: string;
   lat: number;
   lon: number;
-  temperature_C: number;
-  windspeed_kph: number;
-  humidity: number;
-  condition: string;
+  forecast: WeatherAppForecastType[];
 }
 
 export interface WeatherDataType {
