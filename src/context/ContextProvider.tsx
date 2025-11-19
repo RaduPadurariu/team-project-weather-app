@@ -1,6 +1,6 @@
 "use client";
 
-import { ContextProviderType, WeatherType } from "@/types/types";
+import { ContextProviderType, WeatherCoords, WeatherType } from "@/types/types";
 import { useEffect, useState } from "react";
 import { WeatherContext } from "./WeatherContext";
 
@@ -8,9 +8,7 @@ export const ContextProvider = ({ children }: ContextProviderType) => {
   const [currentWeather, setCurrentWeather] = useState<WeatherType | null>(
     null
   );
-  const [coords, setCoords] = useState<{ lat: number; lon: number } | null>(
-    null
-  );
+  const [coords, setCoords] = useState<WeatherCoords | null>(null);
   const [selectedWeather, setSelectedWeather] = useState<WeatherType | null>(
     null
   );
@@ -45,7 +43,6 @@ export const ContextProvider = ({ children }: ContextProviderType) => {
           throw new Error(`Weather fetch failed: ${res.status}`);
         }
         const data: WeatherType = await res.json();
-        console.log(data);
 
         const formatIconUrl = (icon?: string | null): string | null => {
           if (!icon) return null;

@@ -1,18 +1,78 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ForecastDate from "./ForecastDate";
 import ForecastWidget from "./ForecastWidget";
 import ForecastSearchForm from "./ForecastSearchForm";
 import { useWeatherContext } from "@/context/useContext";
-import { WeatherType } from "@/types/types";
+import { WeatherCoords, WeatherType } from "@/types/types";
+import LoadingSpinner from "@/components/common/LoadingSpinner/LoadingSpinner";
 
 const Forecast = () => {
   const { currentWeather } = useWeatherContext();
   const [selectedLocation, setSelectedLocation] = useState<WeatherType | null>(
     null
   );
+  const [selectedCoords, setSelectedCoords] = useState<WeatherCoords | null>(
+    null
+  );
   const [selectedTemp, setSelectedTemp] = useState("C");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    setSelectedLocation(currentWeather);
+  }, [currentWeather]);
+
+  useEffect(() => {
+    if (!selectedCoords) return;
+
+    const fetchWeather = async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetch(
+          `https://python-weather-backend.onrender.com/weather/forecast?q=${selectedCoords.lat},${selectedCoords.lon}&days=4`
+        );
+        if (!res.ok) {
+          throw new Error(`Weather fetch failed: ${res.status}`);
+        }
+        const data: WeatherType = await res.json();
+
+        const formatIconUrl = (icon?: string | null): string | null => {
+          if (!icon) return null;
+          return icon.startsWith("//") ? "https:" + icon : icon;
+        };
+
+        const weather: WeatherType = {
+          city: data.city,
+          country: data.country,
+          lat: data.lat,
+          lon: data.lon,
+          forecast: data.forecast.map((f) => ({
+            date: f.date,
+            avg_humidity: f.avg_humidity,
+            avg_temp_C: f.avg_temp_C,
+            max_temp_C: f.max_temp_C,
+            min_temp_C: f.min_temp_C,
+            max_wind_kph: f.max_wind_kph,
+            condition: {
+              text: f.condition.text,
+              icon: formatIconUrl(f.condition.icon),
+            },
+          })),
+        };
+
+        setSelectedLocation(weather);
+      } catch {
+        setError("Error fetching weather data");
+        setSelectedLocation(null);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchWeather();
+  }, [selectedCoords]);
 
   return (
     <section>
@@ -26,12 +86,9 @@ const Forecast = () => {
               <ForecastDate />
             </div>
           </div>
-          <ForecastSearchForm setSelectedLocation={setSelectedLocation} />
+          <ForecastSearchForm setSelectedCoords={setSelectedCoords} />
         </div>
-        <ForecastWidget
-          currentWeather={currentWeather}
-          selectedLocation={selectedLocation}
-        />
+        <ForecastWidget selectedLocation={selectedLocation} />
         <div className="pt-10">
           <div className="flex w-full justify-between">
             <div className="flex">
@@ -68,7 +125,7 @@ const Forecast = () => {
 
           <div className="pt-10">
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-              {currentWeather?.forecast.slice(1).map((item) => {
+              {selectedLocation?.forecast.slice(1).map((item) => {
                 const icon = item?.condition?.icon;
 
                 return (
@@ -77,7 +134,7 @@ const Forecast = () => {
                     className="border-2 border-[var(--black-200)] rounded-2xl p-3.5"
                   >
                     <div className="text-xs font-semibold text-[var(--black-600)] mb-3">
-                      {item.date}
+                      {isLoading ? <LoadingSpinner /> : item.date}
                     </div>
                     <div className="flex justify-between">
                       <div className="">

@@ -45,9 +45,23 @@ export interface WeatherType {
   forecast: WeatherAppForecastType[];
 }
 
-export interface WeatherDataType {
-  country: string;
-  name: string;
+export interface WeatherCoords {
   lat: number;
   lon: number;
+}
+
+export interface WeatherSuggestionType {
+  city: string;
+  lat: number;
+  lon: number;
+}
+
+export interface WeatherSuggestionApi {
+  components: {
+    city: string;
+  };
+  geometry: {
+    lat: number;
+    lng: number;
+  };
 }
