@@ -42,7 +42,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="flex justify-between">
-            <span className="whitespace-nowrap">Maftei Marius:</span>
+            <span className="whitespace-nowrap">Marius Maftei:</span>
             <ul className="flex ml-2">
               {mariusSocialLinks.map((icon) => {
                 return (

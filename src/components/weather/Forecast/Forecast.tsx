@@ -90,7 +90,7 @@ const Forecast = () => {
         </div>
         <ForecastWidget selectedLocation={selectedLocation} />
         <div className="pt-10">
-          <div className="flex w-full justify-between">
+          <div className="flex w-full justify-between flex-wrap gap-3">
             <div className="flex">
               <div className="mr-3 text-[var(--black-600)] text-2xl cursor-pointer">
                 Forecast for next two days

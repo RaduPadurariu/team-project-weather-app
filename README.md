@@ -1,36 +1,20 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Team Project - WeatherApp (2025)
 
-## Getting Started
+This project is a team-built weather application created together with my friend Marius, who implemented the Python backend while I developed the entire frontend using Next.js and Tailwind CSS.
 
-First, run the development server:
+It is the first project I have ever built based on a complete **Figma** template, which helped me understand UI structure, spacing, color systems, and component mapping from design to code.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+It was also the first time I used **Slack** and **Trello** for real workflow communication and task management. These tools helped us stay organized, discuss API changes efficiently, and simulate a real development process similar to what teams use in production.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The website contains the following pages with fully responsive layouts:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Home page
+- Weather forecast page
+- News page
+- About page
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Can be found at https://teamproject-weatherapp.vercel.app
 
-## Learn More
+Technologies used: Next.js, Python, Tailwind CSS, Typescript, Figma, Slack, Trello.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+All rights reserved - Radu Padurariu & Marius Maftei - 2025
