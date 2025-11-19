@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce"; // importă hookul tău
-import { WeatherType, WeatherApiType } from "@/types/types";
+import { WeatherType } from "@/types/types";
 
 const ForecastSearchForm = ({
   setSelectedLocation,
 }: {
   setSelectedLocation: (value: WeatherType | null) => void;
 }) => {
-  const [suggestions, setSuggestions] = useState<WeatherApiType[]>([]);
+  const [suggestions, setSuggestions] = useState<WeatherType[]>([]);
   const [query, setQuery] = useState("");
   const [isSelecting, setIsSelecting] = useState(false);
 

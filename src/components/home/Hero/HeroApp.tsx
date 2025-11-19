@@ -9,6 +9,9 @@ import React from "react";
 const HeroApp = () => {
   const { weekday, day, month, hour, minute } = useCurrentDate();
   const { currentWeather, isLoading } = useWeatherContext();
+
+  const icon = currentWeather?.forecast?.[0]?.condition?.icon;
+
   return (
     <div className="w-full md:w-1/2 h-auto md:absolute left-[50%] md:top-[-200%] lg:top-[-250%]">
       <div className="w-full h-full relative">
@@ -42,27 +45,53 @@ const HeroApp = () => {
               <div className="text-xs font-semibold text-[var(--black-600)] pb-1">
                 Today
               </div>
-              <div className="text-xs text-[var(--black-600)] pb-2">
-                {day} {month}, {weekday}
+              <div className="text-xs text-[var(--black-600)] pb-2 flex flex-col lg:flex-row">
+                <div>
+                  {day} {month},
+                </div>
+                <div className="ml-0 lg:ml-1">{weekday}</div>
               </div>
               <div className="ml-[-1px] pb-2 flex items-center">
-                <i className="fa-regular mr-2 fa-moon text-xl"></i>
-                <span className="text-xs text-[var(--black-600)]">
+                {/* <i className="fa-regular mr-2 fa-moon text-xl"></i> */}
+                {icon && (
+                  <Image
+                    width={30}
+                    height={30}
+                    src={icon}
+                    alt="Weather Icon"
+                    className="-ml-0.5"
+                  />
+                )}
+
+                <span className="text-xs text-[var(--black-600)] ml-1">
                   {" "}
-                  {isLoading ? <LoadingSpinner /> : currentWeather?.condition}
+                  {isLoading ? (
+                    <LoadingSpinner />
+                  ) : (
+                    currentWeather?.forecast[0].condition.text
+                  )}
                 </span>
               </div>
               <div className="ml-[-1px] pb-2 flex items-center">
                 <i className="fa-solid fa-wind mr-2 text-[var(--purple-500)] text-xl"></i>
                 <span className="text-xs text-[var(--black-600)] flex ">
-                  {isLoading ? <LoadingSpinner /> : currentWeather?.windSpeed}{" "}
+                  {isLoading ? (
+                    <LoadingSpinner />
+                  ) : (
+                    currentWeather?.forecast[0].max_wind_kph
+                  )}{" "}
                   km/h
                 </span>
               </div>
               <div className="ml-[-1px] pb-2 flex items-center">
-                <i className="fa-solid fa-cloud-rain mr-2 text-[var(--purple-500)] text-xl"></i>
+                <i className="fa-solid fa-droplet  mr-2 text-[var(--purple-500)] text-xl"></i>
                 <span className="text-xs text-[var(--black-600)] flex">
-                  {isLoading ? <LoadingSpinner /> : currentWeather?.humidity}%
+                  {isLoading ? (
+                    <LoadingSpinner />
+                  ) : (
+                    currentWeather?.forecast[0].avg_humidity
+                  )}
+                  %
                 </span>
               </div>
             </div>
@@ -71,37 +100,42 @@ const HeroApp = () => {
                 {hour}:{minute}
               </div>
               <div className="text-[32px] flex justify-end">
-                {isLoading ? <LoadingSpinner /> : currentWeather?.temp}&deg;
+                {isLoading ? (
+                  <LoadingSpinner />
+                ) : (
+                  currentWeather?.forecast[0].avg_temp_C
+                )}
+                &deg;
               </div>
             </div>
           </div>
           <div>
-            <ul className="flex w-full justify-between">
-              <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-1.5 lg:px-3 flex flex-col items-center">
-                <div className="text-xs font-semibold mb-1">Now</div>
-                <i className="fa-regular fa-moon text-white text-2xl mb-1"></i>
-                <div className="text-xs font-semibold mb-1">24&deg;</div>
-              </li>
-              <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-1.5 lg:px-3 flex flex-col items-center">
-                <div className="text-xs font-semibold mb-1">00:00</div>
-                <i className="fa-regular fa-moon text-white text-2xl mb-1"></i>
-                <div className="text-xs font-semibold mb-1">12&deg;</div>
-              </li>
-              <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-1.5 lg:px-3 flex flex-col items-center">
-                <div className="text-xs font-semibold mb-1">05:00</div>
-                <i className="fa-regular fa-moon text-white text-2xl mb-1"></i>
-                <div className="text-xs font-semibold mb-1">15&deg;</div>
-              </li>
-              <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-1.5 lg:px-3 flex flex-col items-center">
-                <div className="text-xs font-semibold mb-1">10:00</div>
-                <i className="fa-regular fa-moon text-white text-2xl mb-1"></i>
-                <div className="text-xs font-semibold mb-1">20&deg;</div>
-              </li>
-              <li className="text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-1.5 lg:px-3 flex flex-col items-center">
-                <div className="text-xs font-semibold mb-1">15:00</div>
-                <i className="fa-regular fa-moon text-white text-2xl mb-1"></i>
-                <div className="text-xs font-semibold mb-1">23&deg;</div>
-              </li>
+            <ul className="flex w-full">
+              {currentWeather?.forecast.slice(1).map((item) => {
+                const icon = item.condition?.icon;
+                return (
+                  <li
+                    key={item.date}
+                    className="mr-2 text-white bg-[var(--purple-300)] rounded-[10px] py-2 px-1.5 lg:px-3 flex flex-col items-center"
+                  >
+                    <div className="text-xs font-semibold mb-1">
+                      {item.date}
+                    </div>
+                    {icon && (
+                      <Image
+                        width={30}
+                        height={30}
+                        src={icon}
+                        alt="Weather Icon"
+                        className="-ml-0.5"
+                      />
+                    )}
+                    <div className="text-xs font-semibold mb-1">
+                      {item.avg_temp_C}&deg;
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

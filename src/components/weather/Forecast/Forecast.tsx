@@ -1,5 +1,4 @@
 "use client";
-import { todayForecast } from "@/data/data";
 import Image from "next/image";
 import React, { useState } from "react";
 import ForecastDate from "./ForecastDate";
@@ -13,6 +12,7 @@ const Forecast = () => {
   const [selectedLocation, setSelectedLocation] = useState<WeatherType | null>(
     null
   );
+  const [selectedTemp, setSelectedTemp] = useState("C");
 
   return (
     <section>
@@ -36,17 +36,31 @@ const Forecast = () => {
           <div className="flex w-full justify-between">
             <div className="flex">
               <div className="mr-3 text-[var(--black-600)] text-2xl cursor-pointer">
-                Today
+                Forecast for next two days
               </div>
-              <div className="text-[var(--black-300)] text-2xl cursor-pointer">
+              {/* <div className="text-[var(--black-300)] text-2xl cursor-pointer">
                 Week
-              </div>
+              </div> */}
             </div>
             <div className="flex">
-              <div className="bg-[var(--purple-500)] text-[var(--red-500)] mr-3 rounded-full flex justify-center items-center w-8 leading-8 cursor-pointer text-sm font-semibold">
+              <div
+                onClick={() => setSelectedTemp("C")}
+                className={`${
+                  selectedTemp === "C"
+                    ? "bg-[var(--purple-500)]  text-[var(--red-500)]"
+                    : "bg-[var(--black-50)] text-[var(--black-400)]"
+                } mr-3 rounded-full flex justify-center items-center w-8 leading-8 cursor-pointer text-sm font-semibold`}
+              >
                 <span>&deg;C</span>
               </div>
-              <div className="bg-[var(--black-50)] text-[var(--black-400)] rounded-full flex justify-center items-center w-8 leading-8 cursor-pointer text-sm font-semibold">
+              <div
+                onClick={() => setSelectedTemp("F")}
+                className={`${
+                  selectedTemp === "F"
+                    ? "bg-[var(--purple-500)]  text-[var(--red-500)]"
+                    : "bg-[var(--black-50)] text-[var(--black-400)]"
+                } mr-3 rounded-full flex justify-center items-center w-8 leading-8 cursor-pointer text-sm font-semibold`}
+              >
                 <span>&deg;F</span>
               </div>
             </div>
@@ -54,10 +68,12 @@ const Forecast = () => {
 
           <div className="pt-10">
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-              {todayForecast.map((item) => {
+              {currentWeather?.forecast.slice(1).map((item) => {
+                const icon = item?.condition?.icon;
+
                 return (
                   <li
-                    key={item.id}
+                    key={item.date}
                     className="border-2 border-[var(--black-200)] rounded-2xl p-3.5"
                   >
                     <div className="text-xs font-semibold text-[var(--black-600)] mb-3">
@@ -66,29 +82,34 @@ const Forecast = () => {
                     <div className="flex justify-between">
                       <div className="">
                         <div className="text-xs font-semibold text-[var(--black-200)] mb-3">
-                          {item.wetherType}
+                          {item.condition.text}
                         </div>
                         <div className="flex mb-1">
                           <i className="fas fa-temperature-high block text-[var(--purple-400)] text-xl -ml-1"></i>
                           <div className="text-[var(--black-600)] font-semibold">
-                            {item.temp}&deg;
+                            {selectedTemp === "C"
+                              ? item.avg_temp_C
+                              : (item.avg_temp_C * 1.8 + 32).toFixed(1)}
+                            &deg;
                           </div>
                         </div>
                         <div className="flex ">
                           <i className="fa-solid fa-droplet block text-[var(--purple-400)] text-xl -ml-1.5 mr-0.5"></i>
                           <div className="text-[var(--black-600)] font-semibold">
-                            {item.hum}%
+                            {item.avg_humidity}%
                           </div>
                         </div>
                       </div>
                       <div>
-                        <Image
-                          src={item.clouds}
-                          alt="Weather Image Cloud"
-                          width={36}
-                          height={36}
-                          className="mt-1"
-                        />
+                        {icon && (
+                          <Image
+                            src={icon}
+                            alt="Weather Image Cloud"
+                            width={75}
+                            height={75}
+                            className=""
+                          />
+                        )}
                       </div>
                     </div>
                   </li>
