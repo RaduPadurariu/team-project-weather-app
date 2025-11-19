@@ -24,7 +24,7 @@ const HeroApp = () => {
                 <div className="h-1 bg-[var(--purple-500)] w-[40%] rounded-md"></div>
               </div>
             </div>
-            <div className="text-xs font-semibold text-[var(--purple-500)]">
+            <div className="text-lg font-semibold text-[var(--purple-500)]">
               {isLoading ? <LoadingSpinner /> : currentWeather?.city || "City"}
             </div>
             <div className="cursor-pointer">

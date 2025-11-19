@@ -1,14 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useDebounce } from "@/hooks/useDebounce"; // importă hookul tău
-import { WeatherType } from "@/types/types";
+import {
+  WeatherCoords,
+  WeatherSuggestionApi,
+  WeatherSuggestionType,
+} from "@/types/types";
 
 const ForecastSearchForm = ({
-  setSelectedLocation,
+  setSelectedCoords,
 }: {
-  setSelectedLocation: (value: WeatherType | null) => void;
+  setSelectedCoords: (value: WeatherCoords | null) => void;
 }) => {
-  const [suggestions, setSuggestions] = useState<WeatherType[]>([]);
+  const [suggestions, setSuggestions] = useState<WeatherSuggestionType[]>([]);
   const [query, setQuery] = useState("");
   const [isSelecting, setIsSelecting] = useState(false);
 
@@ -33,7 +37,19 @@ const ForecastSearchForm = ({
         );
         if (!res.ok) throw new Error("Request failed");
         const data = await res.json();
-        setSuggestions(data.results || []);
+        console.log(data);
+
+        const suggestionsData: WeatherSuggestionType[] = [
+          ...data.results.map((el: WeatherSuggestionApi) => {
+            return {
+              city: el.components.city,
+              lat: el.geometry.lat,
+              lon: el.geometry.lng,
+            };
+          }),
+        ];
+        console.log(suggestionsData);
+        setSuggestions(suggestionsData || []);
       } catch (err: unknown) {
         if (err instanceof DOMException && err.name === "AbortError") return;
         if (err instanceof Error) {
@@ -44,36 +60,22 @@ const ForecastSearchForm = ({
       }
     };
 
-    // fetchSuggestions();
+    fetchSuggestions();
 
     return () => controller.abort();
   }, [debouncedQuery, isSelecting]);
 
-  // const handleClick = (item: WeatherApiType) => {
-  //   setIsSelecting(true);
-  //   const city = item.components.city || item.components.country;
-  //   const country = item.components.country;
-  //   const lat = item.components.lat;
-  //   const lng = item.components.lng;
-  //   const temp = item.components.temp;
-  //   const humidity = item.components.humidity;
-  //   const windSpeed = item.components.windSpeed;
-
-  //   const location: WeatherType = {
-  //     city,
-  //     country,
-  //     lat,
-  //     lon,
-  //     temp,
-  //     humidity,
-  //     windSpeed,
-  //   };
-
-  //   setSelectedLocation(location);
-  //   setQuery("");
-  //   setSuggestions([]);
-  //   setTimeout(() => setIsSelecting(false), 300);
-  // };
+  const handleClick = (item: WeatherSuggestionType) => {
+    setIsSelecting(true);
+    const coords = {
+      lat: item.lat,
+      lon: item.lon,
+    };
+    setSelectedCoords(coords);
+    setQuery("");
+    setSuggestions([]);
+    setTimeout(() => setIsSelecting(false), 300);
+  };
 
   return (
     <div className="relative">
@@ -98,9 +100,9 @@ const ForecastSearchForm = ({
             <li
               key={i}
               className="p-2 text-sm border-b last:border-none"
-              // onClick={() => handleClick(s)}
+              onClick={() => handleClick(s)}
             >
-              {/* {s.components.city} */}
+              {s.city}
             </li>
           ))}
         </ul>

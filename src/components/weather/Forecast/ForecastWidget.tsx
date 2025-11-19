@@ -4,13 +4,11 @@ import Image from "next/image";
 import React from "react";
 
 const ForecastWidget = ({
-  currentWeather,
   selectedLocation,
 }: {
-  currentWeather: WeatherType | null;
   selectedLocation: WeatherType | null;
 }) => {
-  const icon = currentWeather?.forecast?.[0]?.condition?.icon;
+  const icon = selectedLocation?.forecast?.[0]?.condition?.icon;
   const finalIcon = icon
     ? icon.startsWith("//")
       ? "https:" + icon
@@ -25,14 +23,14 @@ const ForecastWidget = ({
             <div className="flex flex-col justify-between ">
               <div className="1">
                 <h1 className="text-2xl lg:text-[40px] font-semibold text-white pt-11 pb-3">
-                  {selectedLocation?.city || currentWeather?.city || "City"}
+                  {selectedLocation?.city || selectedLocation?.city || "City"}
                 </h1>
                 <p className="text-base text-[var(--black-100)]">
-                  {selectedLocation?.country || currentWeather?.country}
+                  {selectedLocation?.country || selectedLocation?.country}
                 </p>
               </div>
               <div className="2 font-semibold text-[68px] text-white pt-15">
-                {currentWeather?.forecast[0].avg_temp_C}&deg;
+                {selectedLocation?.forecast[0].avg_temp_C}&deg;
               </div>
             </div>
 
@@ -50,32 +48,32 @@ const ForecastWidget = ({
                   />
                 )}
                 <div className="text-[var(--red-500)] font-semibold">
-                  {currentWeather?.forecast[0].condition.text}
+                  {selectedLocation?.forecast[0].condition.text}
                 </div>
                 <div className="flex flex-col pt-4">
                   <div className="flex mb-3">
                     <i className="fas fa-arrow-up text-[var(--red-500)] text-xl block mr-3"></i>
                     <div className="text-[var(--red-500)]  block">
-                      {currentWeather?.forecast[0].max_temp_C}&deg;
+                      {selectedLocation?.forecast[0].max_temp_C}&deg;
                     </div>
                   </div>
                   <div className="flex mb-3">
                     <i className="fas fa-arrow-down text-[var(--red-500)] text-xl block mr-3"></i>
                     <div className="text-[var(--red-500)]  block">
-                      {currentWeather?.forecast[0].min_temp_C}&deg;
+                      {selectedLocation?.forecast[0].min_temp_C}&deg;
                     </div>
                   </div>
                   <div className="flex mb-3">
                     <i className="fa-solid fa-wind text-[var(--red-500)] text-xl block mr-3"></i>
                     <div className="text-[var(--red-500)] block">
                       {" "}
-                      {currentWeather?.forecast[0].max_wind_kph} km/h
+                      {selectedLocation?.forecast[0].max_wind_kph} km/h
                     </div>
                   </div>
                   <div className="flex mb-3">
                     <i className="fa-solid fa-droplet text-[var(--red-500)] text-xl block mr-3"></i>
                     <div className="text-[var(--red-500)]  block">
-                      {currentWeather?.forecast[0].avg_humidity} %;
+                      {selectedLocation?.forecast[0].avg_humidity} %;
                     </div>
                   </div>
                 </div>
