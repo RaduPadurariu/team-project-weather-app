@@ -1,5 +1,3 @@
-import React from "react";
-
 const HomeWeatherHeading = () => {
   return (
     <section className="relative bg-[url('/images/city.png')] w-full min-h-[450px] bg-cover bg-top bg-no-repeat flex justify-between items-center">

@@ -3,7 +3,6 @@
 import { LinkType } from "@/types/types";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
 
 const NavbarActiveLink = ({
   link,

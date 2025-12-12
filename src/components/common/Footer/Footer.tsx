@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { FooterNavbar } from "./FooterNavbar";
 import { mariusSocialLinks, raduSocialLinks } from "@/data/data";
 
@@ -66,8 +65,7 @@ const Footer = () => {
       <div className="w-full flex justify-center pb-5">
         <div className="text-sm text-[var(--black-300)] text-center px-[15px]">
           <span>
-            Copyright &copy; All rights reserved | This template was inspired
-            by&nbsp;
+            &copy; All rights reserved | This template was inspired by&nbsp;
           </span>
 
           <a

@@ -1,5 +1,3 @@
-import React from "react";
-
 const HomeNewsTitle = ({ title }: { title: string }) => {
   return (
     <section className="flex items-center">

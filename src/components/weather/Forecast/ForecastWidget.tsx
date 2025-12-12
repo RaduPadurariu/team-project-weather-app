@@ -1,7 +1,6 @@
 "use client";
 import { WeatherType } from "@/types/types";
 import Image from "next/image";
-import React from "react";
 
 const ForecastWidget = ({
   selectedLocation,

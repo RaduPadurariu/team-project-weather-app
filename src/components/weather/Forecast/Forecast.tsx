@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ForecastDate from "./ForecastDate";
 import ForecastWidget from "./ForecastWidget";
 import ForecastSearchForm from "./ForecastSearchForm";
@@ -89,6 +89,11 @@ const Forecast = () => {
           <ForecastSearchForm setSelectedCoords={setSelectedCoords} />
         </div>
         <ForecastWidget selectedLocation={selectedLocation} />
+        {error && (
+          <div className="mt-6 p-4 rounded-lg bg-red-100 text-red-700 text-sm">
+            {error}
+          </div>
+        )}
         <div className="pt-10">
           <div className="flex w-full justify-between flex-wrap gap-3">
             <div className="flex">

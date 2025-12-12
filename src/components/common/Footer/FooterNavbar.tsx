@@ -1,4 +1,3 @@
-import React from "react";
 import FooterNavbarActiveLink from "./FooterNavbarActiveLink";
 import { navbarLinks } from "@/data/data";
 

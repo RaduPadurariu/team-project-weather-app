@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./Navbar/Navbar";
 import { useCurrentDate } from "@/hooks/useCurrentDate";
 import { useWeatherContext } from "@/context/useContext";

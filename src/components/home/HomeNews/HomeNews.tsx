@@ -1,4 +1,3 @@
-import React from "react";
 import HomeNewsTitle from "./HomeNewsTitle";
 import Image from "next/image";
 import HomeNewsArticle from "./HomeNewsArticle";

@@ -4,7 +4,6 @@ import LoadingSpinner from "@/components/common/LoadingSpinner/LoadingSpinner";
 import { useWeatherContext } from "@/context/useContext";
 import { useCurrentDate } from "@/hooks/useCurrentDate";
 import Image from "next/image";
-import React from "react";
 
 const HeroApp = () => {
   const { weekday, day, month, hour, minute } = useCurrentDate();

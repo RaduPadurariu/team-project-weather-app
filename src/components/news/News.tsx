@@ -1,4 +1,3 @@
-import React from "react";
 import MainNews from "./MainNews/MainNews";
 import BreakingNews from "./BreakingNews/BreakingNews";
 import Features from "./Features/Features";
